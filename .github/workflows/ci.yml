@@ -46,9 +46,11 @@ jobs:
 
       - name: push the Image to docker repo
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
-          docker tag devops-lab-web:test ${{ secrets.DOCKERHUB_USERNAME }}/devops-lab-web:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-lab-web:latest
+          docker tag devops-lab-web:test $DOCKERHUB_USERNAME/devops-lab-web:latest
+          docker push $DOCKERHUB_USERNAME/devops-lab-web:latest
 
       - name: Cleanup
         if: always()
