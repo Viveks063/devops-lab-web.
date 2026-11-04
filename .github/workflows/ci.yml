@@ -31,3 +31,12 @@ jobs:
       - name: Build Docker image
         run: docker build -t devops-lab-web:test .
 
+      - name: Run container
+        run: docker run -d --name test-web -p 8080:80 devops-lab-web:test
+
+      - name: Test HTTP response
+        run: curl --fail http://localhost:8080/
+
+      - name: Cleanup
+        if: always()
+        run: docker rm -f test-web || true
