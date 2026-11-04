@@ -18,7 +18,7 @@ jobs:
         run: docker --version
 
       - name: Validate HTML file
-        run: test -s index.html
+        run: test -s missing.html
 
   build:
     needs: validate
